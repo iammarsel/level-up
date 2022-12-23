@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button, TextInput,Pressable,Dimensions } from 'r
 
 
 export default function SignUp({ navigation }) {
-  const [text, onChangeText] = React.useState("Useless Text");
+  const [text, onChangeText] = React.useState("");
   return (
     
     <View style={styles.container}>
@@ -20,7 +20,6 @@ export default function SignUp({ navigation }) {
       }} style={styles.button}>
         <Text style={styles.button_text}>Next</Text>
       </Pressable>
-      <Button onPress={() => { navigation.navigate("SignUp") }}title='Create new Account'/>
       </View>
     </View>
   );

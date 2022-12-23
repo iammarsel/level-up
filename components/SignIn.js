@@ -3,8 +3,8 @@ import { ScrollView, StyleSheet, Text, View, Button, TextInput,Pressable,Dimensi
 
 
 export default function SignIn({ navigation }) {
-  const [user, onChangeUser] = React.useState("Username");
-  const [pass, onChangePass] = React.useState("Password");
+  const [user, onChangeUser] = React.useState("");
+  const [pass, onChangePass] = React.useState("");
   return (
     
     <View style={styles.container}>
@@ -13,13 +13,13 @@ export default function SignIn({ navigation }) {
       <TextInput
         style={styles.input}
         onChangeText={onChangeUser}
-        placeholder="username"
+        placeholder="Username"
         value={user}
       />
       <TextInput
         style={styles.input}
         onChangeText={onChangePass}
-        placeholder="password"
+        placeholder="Password"
         value={pass}
       />
       <Pressable onPress={() => {
