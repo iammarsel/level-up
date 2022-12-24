@@ -1,7 +1,6 @@
 import React from 'react'
 import {StyleSheet, Text, View, Button, TextInput,Pressable,Dimensions } from 'react-native';
 
-
 export default function SignUp({ navigation }) {
   const [text, onChangeText] = React.useState("");
   return (
