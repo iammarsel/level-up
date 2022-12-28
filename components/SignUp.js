@@ -1,8 +1,22 @@
 import React from 'react'
 import {StyleSheet, Text, View, Button, TextInput,Pressable,Dimensions } from 'react-native';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 export default function SignUp({ navigation }) {
-  const [text, onChangeText] = React.useState("");
+  const [email, onChangeUser] = React.useState("");
+  const [password, onChangePass] = React.useState("");
+ 
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth,email,password)
+    .then(userCredential => {
+      const user = userCredential.user
+      console.log("Signed up with",user.email);
+      navigation.navigate("Home")
+    })
+    .catch(error => alert(error.message))
+  }
+  
   return (
     
     <View style={styles.container}>
@@ -10,13 +24,18 @@ export default function SignUp({ navigation }) {
       <View style={styles.input_container}>
       <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
-        placeholder="enter your name"
-        value={text}
+        onChangeText={onChangeUser}
+        placeholder="Enter your Email"
+        value={email}
       />
-      <Pressable onPress={() => {
-        navigation.navigate("SignIn")
-      }} style={styles.button}>
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangePass}
+        placeholder="Enter a Password"
+        secureTextEntry
+        value={password}
+      />
+      <Pressable onPress={handleSignUp} style={styles.button}>
         <Text style={styles.button_text}>Next</Text>
       </Pressable>
       </View>

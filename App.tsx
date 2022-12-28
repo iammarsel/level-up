@@ -3,6 +3,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Starter from './components/Starter';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './components/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,10 +15,20 @@ export default function App() {
         name = "Menu"
         component={Starter}
         options={{
-          headerShown:false
-         
+          headerShown:false,
+          gestureEnabled:false
         }}
       />
+
+      <Stack.Screen
+        name = "Home"
+        component={Home}
+        options={{
+          headerShown:false,
+          gestureEnabled:false
+        }}
+      />
+
       <Stack.Screen
         name = "SignIn"
         component={SignIn}
@@ -30,6 +41,7 @@ export default function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
+          gestureEnabled:false
         }}
       />
       <Stack.Screen
@@ -44,8 +56,10 @@ export default function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
+          gestureEnabled:false
         }}
       />
+      
     </Stack.Navigator>
     </NavigationContainer>
   );

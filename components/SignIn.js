@@ -1,32 +1,58 @@
-import React from 'react'
-import { ScrollView, StyleSheet, Text, View, Button, TextInput,Pressable,Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, Button, TextInput, Pressable, Dimensions } from 'react-native';
+import { signInWithEmailAndPassword, getAuth, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 
 export default function SignIn({ navigation }) {
-  const [user, onChangeUser] = React.useState("");
-  const [pass, onChangePass] = React.useState("");
+  const [email, onChangeUser] = React.useState("");
+  const [password, onChangePass] = React.useState("");
+  useEffect(() => {
+    unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        const uid = user.uid;
+        console.log('this')
+        navigation.navigate("Home")
+      } else {
+        // User is signed out
+      }
+    });
+    return () => {
+      unsubscribe
+    }
+  }, [])
+
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user
+        console.log("Signed in with", user.email);
+      })
+      .catch(error => alert(error.message))
+  }
   return (
-    
+
     <View style={styles.container}>
       <Text style={styles.title}>Sign In Here </Text>
       <View style={styles.button_container}>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeUser}
-        placeholder="Username"
-        value={user}
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangePass}
-        placeholder="Password"
-        value={pass}
-      />
-      <Pressable onPress={() => {
-        navigation.navigate("SignIn")
-      }} style={styles.button}>
-        <Text style={styles.button_text}>Sign In</Text>
-      </Pressable>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeUser}
+          placeholder="Username/Email"
+          value={email}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangePass}
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+        />
+        <Pressable onPress={handleSignIn} style={styles.button}>
+          <Text style={styles.button_text}>Sign In</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -65,7 +91,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
   },
-  input:{
+  input: {
     backgroundColor: 'white',
     borderColor: '#494a4d',
     borderRadius: 5,
