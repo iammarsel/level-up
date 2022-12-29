@@ -4,7 +4,7 @@ import SignUp from './components/SignUp';
 import Starter from './components/Starter';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './components/Home';
-//testing
+//testing 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
