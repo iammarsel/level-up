@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#000000',
     flex: 1,
-    paddingTop: 100,
+    paddingTop: height*0.1,
     paddingHorizontal: 40
   },
   title: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     color: '#03c2fc',
   },
   button_container: {
-    marginTop: 520
+    marginTop: height*0.6
   },
   button: {
     alignItems: 'center',

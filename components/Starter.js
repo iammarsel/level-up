@@ -5,7 +5,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
+
 export default function Starter({ navigation }) {
+  const { height } = Dimensions.get('window');
+
+  
   return (
     
     <View style={styles.container}>
@@ -27,8 +31,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#000000',
     flex: 1,
-    paddingTop: 100,
-    paddingHorizontal: 40
+    paddingTop: height*0.1,
+    paddingHorizontal: "5%"
   },
   title: {
     fontSize: 40,
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
     color: '#03c2fc',
   },
   button_container: {
-    marginTop: 520
+    marginTop: height*0.6
   },
   button: {
     alignItems: 'center',

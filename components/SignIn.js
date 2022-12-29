@@ -13,7 +13,7 @@ export default function SignIn({ navigation }) {
         // User is signed in
         const uid = user.uid;
         console.log('this')
-        navigation.navigate("Home")
+        navigation.replace("Home")
       } else {
         // User is signed out
       }
