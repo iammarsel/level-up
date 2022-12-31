@@ -8,8 +8,6 @@ const Stack = createNativeStackNavigator();
 
 export default function Starter({ navigation }) {
   const { height } = Dimensions.get('window');
-
-  
   return (
     
     <View style={styles.container}>

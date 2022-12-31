@@ -7,28 +7,13 @@ import { auth } from '../firebaseConfig';
 export default function SignIn({ navigation }) {
   const [email, onChangeUser] = React.useState("");
   const [password, onChangePass] = React.useState("");
-  useEffect(() => {
-    unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
-        const uid = user.uid;
-        console.log('this')
-        navigation.replace("Home")
-      } else {
-        // User is signed out
-      }
-    });
-    return () => {
-      unsubscribe
-    }
-  }, [])
-
 
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user
         console.log("Signed in with", user.email);
+        navigation.replace("Home")
       })
       .catch(error => alert(error.message))
   }
@@ -42,6 +27,7 @@ export default function SignIn({ navigation }) {
           onChangeText={onChangeUser}
           placeholder="Username/Email"
           value={email}
+          keyboardType="email-address"
         />
         <TextInput
           style={styles.input}

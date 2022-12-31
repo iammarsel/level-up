@@ -11,10 +11,18 @@ export default function Home({ navigation }) {
     })
     .catch(error => alert(error.message))
   }
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome {auth.currentUser?.email}</Text>
+
+      <Pressable onPress={() => {
+        navigation.replace("Survey")
+      }} style={styles.button}>
+        <Text style={styles.button_text}>Start Your Survey</Text>
+      </Pressable>
       <View style={styles.button_container}>
+
       <Pressable onPress={handleSignOut} style={styles.button}>
         <Text style={styles.button_text}>Sign Out</Text>
       </Pressable>
