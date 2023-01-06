@@ -1,20 +1,30 @@
-import React from 'react'
+import * as React from 'react';
 import {StyleSheet, Text, View, Button, TextInput,Pressable,Dimensions } from 'react-native';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
+import { auth,db } from '../firebaseConfig';
+//import { addDoc, collection } from 'firebase/firestore';
+//import { firebase } from '@react-native-firebase/firestore';
+//import { app } from '@react-native-firebase/app'
+//import firestore from '@react-native-firebase/firestore'
 
 export default function SignUp({ navigation }) {
-  const [email, onChangeUser] = React.useState("");
+  const [user, onChangeUser] = React.useState("");
+  const [email, onChangeEmail] = React.useState("");
   const [password, onChangePass] = React.useState("");
- 
+ //firebase.firestore().collection('users')
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth,email,password)
     .then(userCredential => {
-      const user = userCredential.user
-      console.log("Signed up with",user.email);
+      //db.collection("users").doc
+      //addDoc(collection(db,"users",email),{
+      //  "username": user
+      //})
+      console.log('...')
+    }).then(() => {
+      console.log("Signed up with",user);
       navigation.navigate("Home")
-    })
-    .catch(error => alert(error.message))
+    }).catch(error => alert(error.message));
+    
   }
   
   return (
@@ -25,6 +35,12 @@ export default function SignUp({ navigation }) {
       <TextInput
         style={styles.input}
         onChangeText={onChangeUser}
+        placeholder="Enter your name"
+        value={user}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeEmail}
         placeholder="Enter your Email"
         value={email}
       />
